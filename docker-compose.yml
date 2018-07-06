@@ -1,0 +1,30 @@
+version: "3"
+services:
+  nodejs:
+    build:
+      context: ./images/nodejs
+      dockerfile: Dockerfile
+    image: nodejs:latest
+    volumes:
+      - ./source/web-app-js:/usr/src/app
+    environment:
+      - PORT=3000
+    ports:
+      - "${HOST_PORT_APP:-9000}:3000"
+      - "8080:8080" # webpack-dev-server
+    command: yarn server
+
+  nginx:
+    image: nginx
+    volumes:
+      # Nginx configs
+      - ./hosts/nginx.conf:/etc/nginx/nginx.conf
+      - ./hosts/test-app.conf:/etc/nginx/sites-conf/test-app.conf
+      # Webapp source
+      - ./source/web-app-js/dist:/var/www/webapp/
+    ports:
+      - "${APPLICATION_PORT:-8030}:80" # The site with domain NGINX_HOST
+    environment:
+      - NGINX_HOST=test-app.local # Add NGINX_HOST to your /etc/hosts on host machine
+      - NGINX_PORT=80
+    command: /bin/bash -c "envsubst < /etc/nginx/sites-conf/test-app.conf > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"

@@ -1,3 +1,4 @@
 .idea/
 source/web-app-js/node_modules
-dist/
+.DS_Store
+.env
