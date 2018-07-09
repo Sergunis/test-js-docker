@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
+import cssBootstrap from './bootstrap.4.1.1.min.css';
 
 const container_css_class = 'container';
 
@@ -12,6 +13,22 @@ function init() {
 
 document.body.appendChild(init());
 
-const element = <h1>Oh my God! It's working!</h1>;
+function Welcome(props) {
+  return (
+    <Fragment>
+      <h1>Welcome home {props.name}!</h1>
+      <button className="btn btn-primary">push me</button>
+    </Fragment>
+  )
+}
 
-ReactDOM.render(element, document.querySelector(`.${container_css_class}`));
+function App() {
+  return (
+    <div>
+      <Welcome name="Man"/>
+    </div>
+  )
+}
+
+
+ReactDOM.render(<App />, document.querySelector(`.${container_css_class}`));
