@@ -8,6 +8,14 @@ function init() {
   let container = document.createElement('div');
   container.classList.add(container_css_class);
 
+  // let bootstrap = document.createElement('link');
+  // bootstrap.rel = 'stylesheet';
+  // bootstrap.href = 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css';
+  // bootstrap.integrity = 'sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB';
+  // bootstrap.crossOrigin = 'anonymous';
+  //
+  // document.head.appendChild(bootstrap);
+
   return container;
 }
 
