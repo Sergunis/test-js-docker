@@ -2,3 +2,5 @@
 source/web-app-js/node_modules
 .DS_Store
 .env
+source/web-app-js/dist/*
+!source/web-app-js/dist/.gitkeep
