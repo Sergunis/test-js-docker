@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import cssBootstrap from './bootstrap.4.1.1.min.css';
-import { HashRouter as Router, Link, NavLink, Route } from 'react-router-dom';
+import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import Sum from './components/001 a+b';
+import Summa from './components/002 summa';
 
 const container_css_class = 'container';
 
@@ -25,54 +27,38 @@ document.body.appendChild(init());
 const Welcome = (props) => {
   return (
     <div>
-      <h1>Welcome home {props.name}!</h1>
-      <button className="btn btn-primary">push me</button>
-      <br/>
-      <NavLink to="/dashboard">Dashboarh</NavLink>
-      <br/>
-      <Link to="/tacos">Tacos</Link>
+      <h1>Welcome home stranger</h1>
     </div>
   );
 };
 
-const Dashboard = (props) => {
+const Nav = (props) => {
   return (
-    <div>
-      This is a dashboard!
-    </div>
+    <ul>
+      <li><Link to="/sum">A+B</Link></li>
+      <li><Link to="/summa">Summa</Link></li>
+    </ul>
   );
 };
 
-const Carnitas = () => {
+const Goback = () => {
   return (
-    <div>
-      Carnitas
-    </div>
+    <div>&larr; <Link to="/">goback</Link></div>
   )
-};
-
-const Tacos = (props) => {
-  const { match } = props;
-  console.log(props);
-  return (
-    <div>
-      <Link to={match.url + '/carnitas?get=343'}>carnitas</Link>
-      <Route
-        path={match.url + '/carnitas'}
-        component={Carnitas}
-      />
-    </div>
-  );
-
 };
 
 function App() {
   return (
     <Router>
       <div>
-        <Welcome name="Man"/>
-        <Route path="/dashboard" component={Dashboard}/>
-        <Route path="/tacos" component={Tacos}/>
+        <Welcome/>
+        <Switch>
+          <Route exact path="/" component={Nav}/>
+          <Route component={Goback}/>
+        </Switch>
+
+        <Route path="/sum" component={Sum}/>
+        <Route path="/summa" component={Summa}/>
       </div>
     </Router>
   );
