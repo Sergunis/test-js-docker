@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import cssBootstrap from './bootstrap.4.1.1.min.css';
+import style from './style.css';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Sum from './components/001 a+b';
 import Summa from './components/002 summa';
