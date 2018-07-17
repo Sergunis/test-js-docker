@@ -17,7 +17,7 @@ class Sum extends Component {
 
   handleChangeInput(event) {
     let newState = {};
-    newState[event.target.name] = event.target.value;
+    newState[event.target.name] = parseInt(event.target.value);
 
     this.setState(newState);
   }
@@ -27,7 +27,7 @@ class Sum extends Component {
   }
 
   handleClickCalculateButton() {
-    const sum = this.calculate(parseInt(this.state.a), parseInt(this.state.b));
+    const sum = this.calculate(this.state.a, this.state.b);
     this.setState({ sum });
   }
 

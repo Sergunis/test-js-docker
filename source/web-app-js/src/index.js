@@ -4,7 +4,7 @@ import cssBootstrap from './bootstrap.4.1.1.min.css';
 import style from './style.css';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Sum from './components/001 a+b';
-import Summa from './components/002 summa';
+import SummaN from './components/002 summa';
 
 const container_css_class = 'container';
 
@@ -37,7 +37,7 @@ const Nav = (props) => {
   return (
     <ul>
       <li><Link to="/sum">A+B</Link></li>
-      <li><Link to="/summa">Summa</Link></li>
+      <li><Link to="/summa">Summa N</Link></li>
     </ul>
   );
 };
@@ -45,7 +45,7 @@ const Nav = (props) => {
 const Goback = () => {
   return (
     <div>&larr; <Link to="/">goback</Link></div>
-  )
+  );
 };
 
 function App() {
@@ -59,7 +59,7 @@ function App() {
         </Switch>
 
         <Route path="/sum" component={Sum}/>
-        <Route path="/summa" component={Summa}/>
+        <Route path="/summa" component={SummaN}/>
       </div>
     </Router>
   );
