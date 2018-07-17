@@ -2,36 +2,33 @@ import React, { Component } from 'react';
 
 class Sum extends Component {
 
-
   constructor(props) {
     super(props);
 
-    this.nameA = 'a';
-    this.nameB = 'b';
-    this.nameSum = 'sum';
+    this.state = {
+      a: 0,
+      b: 0,
+      sum: 0
+    };
 
-    this.state = {};
-    this.state[this.nameA] = 0;
-    this.state[this.nameB] = 0;
-    this.state[this.nameSum] = 0;
-
-    this.typing = this.typing.bind(this);
-    this.calculate = this.calculate.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.handleClickCalculateButton = this.handleClickCalculateButton.bind(this);
   }
 
-  typing(event) {
+  handleChangeInput(event) {
     let newState = {};
     newState[event.target.name] = event.target.value;
 
     this.setState(newState);
   }
+  
+  calculate(a, b) {
+    return a + b;
+  }
 
-  calculate() {
-    const sum = parseInt(this.state[this.nameA]) + parseInt(this.state[this.nameB]);
-    let newState = {};
-    newState[this.nameSum] = sum;
-
-    this.setState(newState)
+  handleClickCalculateButton() {
+    const sum = this.calculate(parseInt(this.state.a), parseInt(this.state.b));
+    this.setState({ sum });
   }
 
   render() {
@@ -39,19 +36,16 @@ class Sum extends Component {
       <div>
         <h2>A+B</h2>
         <form className="form-inline">
-          <input type="text" name={this.nameA} value={this.state.a} onFocus={(event) => event.target.select()} onChange={this.typing} className="form-control" maxLength={9}/>
+          <input type="text" name={'a'} value={this.state.a} onFocus={(event) => event.target.select()} onChange={this.handleChangeInput} className="form-control" maxLength={9}/>
           +
-          <input type="text" name={this.nameB} value={this.state.b} onFocus={(event) => event.target.select()} onChange={this.typing} className="form-control" maxLength={9}/>
+          <input type="text" name={'b'} value={this.state.b} onFocus={(event) => event.target.select()} onChange={this.handleChangeInput} className="form-control" maxLength={9}/>
           &nbsp; = &nbsp;
           {this.state.sum}
         </form>
         <div>
-          <button onClick={this.calculate} className="btn btn-info calculate-btn">Calculate</button>
+          <button onClick={this.handleClickCalculateButton} className="btn btn-info calculate-btn">Calculate</button>
         </div>
-
-
       </div>
-
     );
   }
 }
