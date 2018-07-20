@@ -5,6 +5,7 @@ import style from './style.css';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Sum from './components/001 a+b';
 import SummaN from './components/002 summa';
+import Square5 from './components/003 5x5=25';
 
 const container_css_class = 'container';
 
@@ -36,8 +37,9 @@ const Welcome = (props) => {
 const Nav = (props) => {
   return (
     <ul>
-      <li><Link to="/sum">A+B</Link></li>
-      <li><Link to="/summa">Summa N</Link></li>
+      <li><Link to="/sum">001 — A+B</Link></li>
+      <li><Link to="/summa">002 — Summa N</Link></li>
+      <li><Link to="/square5">003 — 5x5=25</Link></li>
     </ul>
   );
 };
@@ -60,6 +62,7 @@ function App() {
 
         <Route path="/sum" component={Sum}/>
         <Route path="/summa" component={SummaN}/>
+        <Route path="/square5" component={Square5}/>
       </div>
     </Router>
   );

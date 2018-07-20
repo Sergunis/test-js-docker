@@ -12,11 +12,12 @@ class SummaN extends Component {
 
     this.handleChangeInput = this.handleChangeInput.bind(this);
     this.handleClickCalculateButton = this.handleClickCalculateButton.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
   }
 
   handleChangeInput(event) {
     let newState = {};
-    newState[event.target.name] = parseInt(event.target.value);
+    newState[event.target.name] = event.target.value;
 
     this.setState(newState);
   }
@@ -30,8 +31,14 @@ class SummaN extends Component {
       });
   }
 
+  handleEnter(event) {
+    if (event.charCode == 13) {
+      this.handleClickCalculateButton();
+    }
+  }
+
   handleClickCalculateButton() {
-    let summaN = this.calculate(this.state.n);
+    let summaN = this.calculate(parseInt(this.state.n));
     this.setState({ summaN });
   }
 
@@ -39,8 +46,9 @@ class SummaN extends Component {
     return (
       <div>
         <h2>Summa</h2>
+        <blockquote>Требуется посчитать сумму целых чисел, расположенных между числами 1 и N включительно.</blockquote>
         <h3>Input data</h3>
-        <input className="form-control" name={'n'} onChange={this.handleChangeInput} value={this.state.n}
+        <input autoFocus={true} className="form-control" name={'n'} onKeyPress={this.handleEnter} onChange={this.handleChangeInput} value={this.state.n}
                maxLength={5}/>
 
         <button className="btn btn-primary calculate-btn" onClick={this.handleClickCalculateButton}>calculate</button>

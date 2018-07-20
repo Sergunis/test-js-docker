@@ -35,6 +35,7 @@ class Sum extends Component {
     return (
       <div>
         <h2>A+B</h2>
+        <blockquote>Требуется сложить два целых числа А и В.</blockquote>
         <form className="form-inline">
           <input type="text" name={'a'} value={this.state.a} onFocus={(event) => event.target.select()} onChange={this.handleChangeInput} className="form-control" maxLength={9}/>
           +
