@@ -1,6 +1,5 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
   entry: {
     app: './src/index.js'
@@ -24,7 +23,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react']
+            presets: ['env', 'react', 'flow'],
+            plugins: [require('babel-plugin-transform-class-properties')]
           }
         }
       },
@@ -38,7 +38,7 @@ module.exports = {
   },
   plugins: [
     new htmlWebpackPlugin({
-      title: 'Output managment'
+      title: 'Output management'
     })
   ]
 };

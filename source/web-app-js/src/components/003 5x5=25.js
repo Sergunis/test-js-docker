@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 
 const Rules = () => {
@@ -15,14 +17,21 @@ const Rules = () => {
       </blockquote>
 
       <blockquote>На вход подаем единственную строку с одним натуральным числом А, оканчивающееся на цифру 5, не
-        превышающее 4*105.
+        превышающее 4*10<sup>5</sup>.
       </blockquote>
     </div>
   );
 };
 
-class Square5 extends Component {
-  constructor(props) {
+type State = {
+  value: string,
+  errorValue: boolean,
+  input: string,
+  output: string
+}
+
+class Square5 extends Component<{}, State> {
+  constructor(props: Object) {
     super(props);
 
     this.state = {
@@ -33,21 +42,35 @@ class Square5 extends Component {
     };
 
     this.handleTyping = this.handleTyping.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  calculate(value) {
-    console.log(value);
-  }
+  lastIs5 = (value: number): boolean => {
+    const str = value.toString();
+    return parseInt(str[str.length - 1]) === 5;
+  };
 
+  calculate = (value: number) => {
+    let output;
 
+    if (this.lastIs5(value)) {
+      output = Math.pow(value, 2);
+    } else {
+      output = '—';
+    }
 
-  handleSubmit(event) {
+    return output;
+  };
+
+  validate = (value: number): boolean => {
+    return isNaN(value) || value > 400000;
+  };
+
+  handleSubmit = (event: Object) => {
     event.preventDefault();
 
     const value = parseInt(this.state.value);
 
-    if (isNaN(value)) {
+    if (this.validate(value)) {
       this.setState({
         errorValue: true,
         input: '—',
@@ -55,21 +78,21 @@ class Square5 extends Component {
       });
     } else {
       this.setState({
-        value,
-        input: value
+        value: value.toString(),
+        input: value.toString(),
+        output: this.calculate(value).toString()
       });
-      this.calculate(value);
     }
-  }
+  };
 
-  handleTyping(event) {
+  handleTyping = (event: Object) => {
     if (this.state.errorValue) {
       this.setState({ errorValue: false });
     }
     this.setState({
       value: event.target.value
     });
-  }
+  };
 
   render() {
 
@@ -95,6 +118,7 @@ class Square5 extends Component {
                 autoFocus="on"
                 autoComplete="off"
                 name="number"
+                maxLength={6}
                 onChange={this.handleTyping}
                 value={this.state.value}
                 className={`form-control ${classInput}`}
@@ -116,7 +140,7 @@ class Square5 extends Component {
           <thead>
           <tr>
             <th scope="col">Input</th>
-            <th scope="col">Output</th>
+            <th scope="col">input<sup>2</sup></th>
           </tr>
           </thead>
           <tbody>
